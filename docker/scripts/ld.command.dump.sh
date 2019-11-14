@@ -34,7 +34,7 @@ function ld_command_dump_exec() {
     cd $PROJECT_ROOT/$DATABASE_DUMP_STORAGE
     ln -sf db-container-dump-$DATE.sql.gz db-container-dump-LATEST.sql.gz
     cd $PROJECT_ROOT
-    if [ "$STARTED" -eq "1" ]; then
+    if [ "TESTING${STARTED}" = "TESTING1" ]; then
        echo -e "${Yellow}Stopping DB container.${Color_Off}"
        docker-compose -f $DOCKER_COMPOSE_FILE stop $CONTAINER_DB
     fi

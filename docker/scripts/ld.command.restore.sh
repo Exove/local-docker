@@ -6,8 +6,8 @@
 function ld_command_restore_exec() {
     TARGET_FILE_NAME=${1:-${DATABASE_DUMP_STORAGE}/db-container-dump-LATEST.sql.gz}
     COMMAND_SQL_DB_RESTORE_INFO="mysql --host "${CONTAINER_DB:-db}" -uroot  -p"$MYSQL_ROOT_PASSWORD" -e 'show databases'"
-    COMMAND_SQL_DB_RESTORER="gunzip < /var/db_dumps/db-container-dump-LATEST.sql.gz | mysql --host "${CONTAINER_DB:-db}" -uroot -p"$MYSQL_ROOT_PASSWORD""
     COMMAND_SQL_DB_USERS="mysql --host "${CONTAINER_DB:-db}" -uroot  -p"$MYSQL_ROOT_PASSWORD" -D mysql -e \"SELECT User, Host from mysql.user WHERE User NOT LIKE 'mysql%';\""
+    COMMAND_SQL_DB_RESTORER="gunzip < ${TARGET_FILE_NAME} | mysql --host "${CONTAINER_DB:-db}" -uroot -p"$MYSQL_ROOT_PASSWORD""
 
     if [ ! -e "$TARGET_FILE_NAME" ]; then
         if [ -z "$1" ]; then

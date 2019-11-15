@@ -186,7 +186,7 @@ Execute `./ld` to see some options to control your local docker stack.
 Behind the scenes script starts and stops files syncing and containers.
 
 More importantly using it helps you to not delete database by mistake,
-but executes (and restores) database backups in `db_dumps/` -folder,
+but executes (and restores) database backups in `db_dumps/` folder,
 keeping most recent as the restorable dump. 
 
 #### Initial start

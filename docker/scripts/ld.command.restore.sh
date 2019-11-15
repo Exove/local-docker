@@ -72,5 +72,5 @@ function ld_command_restore_exec() {
   }
 
 function ld_command_restore_help() {
-    echo "Import latest db. Optionally provide file name. Dump file must be located in $DATABASE_DUMP_STORAGE -folder."
+    echo "Import db into container. Accepts two optional arguments: 1: location of file if other than ${DATABASE_DUMP_STORAGE}/db-container-dump-LATEST.sql.gz; 2: target database, unless restoring complete schema, as created by the command './ld dump'."
 }

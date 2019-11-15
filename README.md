@@ -232,11 +232,26 @@ This is done automatically when you stop or destroy your containers.
 
 #### Restore (old) db backup
  
- Put a file in `db_dumps/` -folder and create a symlink pointing to it:
- 
-    $ ln -s MY_GZIPPED_MYSQLDUMP_FILE.sql.gz ./db_dumps/db-container-dump-LATEST.sql.gz
-    $ ./ld restore [PATH-TO-THE-GZIP-DUMP]
+ Put a file in `db_dumps/` folder and create a symlink pointing to it:
 
+    $ ln -s MY_GZIPPED_MYSQLDUMP_FILE.sql.gz ./db_dumps/db-container-dump-LATEST.sql.gz
+    $ ./ld restore
+
+#### Restore (old) db backup from arbitrarily named file
+
+ Put a file in `db_dumps/` folder:
+
+    $ mv MY_GZIPPED_MYSQLDUMP_FILE.sql.gz ./db_dumps/
+    $ ./ld restore db_dumps/MY_GZIPPED_MYSQLDUMP_FILE.sql.gz
+
+#### Restore single database from arbitrarily named file
+
+ Put a file in `db_dumps/` folder:
+
+    $ mv MY_GZIPPED_MYSQLDUMP_FILE_OF_ONE_DB.sql.gz ./db_dumps/
+    $ ./ld restore db_dumps/MY_GZIPPED_MYSQLDUMP_FILE_OF_ONE_DB.sql.gz MY_DB_NAME
+
+  Note: In the default configuration you'd want to use 'drupal' for MY_DB_NAME in most cases.
 
 #### Composer, Drush, Drupal
 

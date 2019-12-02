@@ -10,6 +10,17 @@ if [ ! -f "./docker/scripts/ld.colors.sh" ]; then
 fi
 . ./docker/scripts/ld.colors.sh
 
+# Check if there are untracked or unstaged changes.
+MODIFIED_FILES=$(git ls-files -m | wc -l)
+UNTRACKED_FILES=$(git ls-files -o | wc -l)
+if [[ ( $MODIFIED_FILES -ne 0 ) || ( $UNTRACKED_FILES -ne 0 ) ]] ; then
+    echo "You have ${MODIFIED_FILES} modified and ${UNTRACKED_FILES} untracked files present. It is not recommended to continue without stashing them." 
+    read -r -p "Stash changes including untracked files before proceeding? (Y/n): "
+    if [[ ! ( $REPLY =~ ^[Nn] ) ]] ; then
+        git stash --include-untracked || { echo -e "${Red}ERROR: Could not stash changes, aborting.${Color_Off}" >&2; exit 1; }
+    fi
+fi
+
 # When no tag is provided we'll fallback to use the 'latest'.
 TAG=${1:-latest}
 TAG_PROVIDED=

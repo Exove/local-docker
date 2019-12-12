@@ -100,3 +100,10 @@ for FILE in $LIST; do
 done
 
 echo -e "${Yellow}Optionally update your own .env.local file, too.${Color_Off}"
+
+if [[ -v STASHED ]] ; then
+    read -r -p "You had changes that were stashed. Would you like to pop the stash now? (Y/n): "
+    if [[ ! ( $REPLY =~ ^[Nn] ) ]] ; then
+        git stash pop
+    fi
+fi

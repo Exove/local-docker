@@ -53,6 +53,7 @@ TEMP_FILENAME="release-${RELEASE_TAG_CLEAN}.tar.gz"
 if [[ ( -n "${TMPDIR}" ) && ( -d "${TMPDIR}" ) && ( -w "${TMPDIR}" ) ]] ; then
     DIR="${TMPDIR}/local-docker/${RELEASE_TAG_CLEAN}"
 else
+    LOCAL_TMP_DIR=1
     DIR=".ld-tmp-"$(date +%s)
 fi
 mkdir -p $DIR
@@ -96,6 +97,10 @@ UPDATE_TARGETS=(
 for FILE in "${UPDATE_TARGETS[@]}" ; do
     cp -fr "$DIR/$SUBDIR/$FILE" .
 done
+
+# Remove temp dir if it was created under current directory, but take precautions,
+# the DIR value must not remove root (/).
+[[ ${LOCAL_TMP_DIR-0} -eq 1 ]] && echo rm -rf "$(pwd)/$DIR"
 
 echo
 echo -e "${Green}Local-docker updated to version ${BGreen}${RELEASE_NAME}${Green}.${Color_Off}"

@@ -11,8 +11,12 @@ fi
 . ./docker/scripts/ld.colors.sh
 
 # Check if there are untracked or unstaged changes.
-MODIFIED_FILES=$(( $(git ls-files -m --exclude-standard | wc -l) )) ;  [[ $MODIFIED_FILES -ne 0 ]] && CHANGES="${MODIFIED_FILES} modified"
-UNTRACKED_FILES=$(( $(git ls-files -o --exclude-standard | wc -l) )); [[ $UNTRACKED_FILES -ne 0 ]] && { CHANGES="${CHANGES:+$CHANGES and }${UNTRACKED_FILES} untracked" ; }
+MODIFIED_FILES=$(( $(git ls-files -m --exclude-standard | wc -l) ))
+[[ $MODIFIED_FILES -ne 0 ]] && \
+    CHANGES="${MODIFIED_FILES} modified"
+UNTRACKED_FILES=$(( $(git ls-files -o --exclude-standard | wc -l) ))
+[[ $UNTRACKED_FILES -ne 0 ]] && \
+    CHANGES="${CHANGES:+$CHANGES and }${UNTRACKED_FILES} untracked"
 if [[ -n ${CHANGES:-} ]] ; then
     echo -e "${Yellow}There are ${CHANGES} files present. It is not recommended to continue without stashing them.${Color_Off}" >&2
     read -r -p "Stash changes including untracked files before proceeding? (Y/n): (^C to abort.)"

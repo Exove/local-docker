@@ -21,6 +21,8 @@ function ld_command_self-update_exec() {
             rm "${SELF_UPDATE_TEMP_SCRIPT}"
         fi
     fi
+    # If we return to the ld script and it has changed, things may break.
+    exit 0
 }
 
 function ld_command_self-update_help() {

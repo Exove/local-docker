@@ -2,8 +2,9 @@
 # File
 #
 # This file contains self-update -command for local-docker script ld.sh.
-# Strict mode (without strict IFS): http://redsymbol.net/articles/unofficial-bash-strict-mode/
+# Strict mode http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
+IFS=$'\n\t'
 # Get colors.
 if [ ! -f "./docker/scripts/ld.colors.sh" ]; then
     echo "File ./docker/scripts/ld.colors.sh missing."
@@ -82,8 +83,17 @@ fi
 
 tar xzf "$DIR/$TEMP_FILENAME" -C "$DIR"
 SUBDIR=$(ls $DIR |grep local-docker)
-LIST=" .editorconfig .env.example .env.local.example .gitignore.example ./.github ./docker ./git-hooks ld.sh"
-for FILE in $LIST; do
+UPDATE_TARGETS=(
+    ".editorconfig"
+    ".env.example"
+    ".env.local.example"
+    ".gitignore.example"
+    "./.github"
+    "./docker"
+    "./git-hooks"
+    "ld.sh"
+)
+for FILE in "${UPDATE_TARGETS[@]}" ; do
     cp -fr "$DIR/$SUBDIR/$FILE" .
 done
 

@@ -3,11 +3,24 @@
 #
 # This file contains self-update -command for local-docker script ld.sh.
 
+SELF_UPDATE_SCRIPT=./docker/scripts/self-update.sh
+SELF_UPDATE_TEMP_SCRIPT=./self-update.sh
+
 function ld_command_self-update_exec() {
-    echo -e "${BYellow}This command is removed.${Color_Off}"
-    echo -e "${Yellow}You can update the local-docker issuing command from your PROJECT_ROOT.${Color_Off}"
-    echo -e "\$ ${Yellow}docker/scripts/self-update.sh [TAG].${Color_Off}"
-    echo -e "${Yellow}View available releases: ${BYellow}https://github.com/Exove/local-docker/releases${Yellow}.${Color_Off}"
+    # Make a copy of the self-update script itself to avoid the update process
+    # breaking when the self-update script itself is changed.
+    cp "${SELF_UPDATE_SCRIPT}" "${SELF_UPDATE_TEMP_SCRIPT}"
+    # Use the copy to perform the actual update.
+    . "${SELF_UPDATE_TEMP_SCRIPT}" "$@"
+    # The copy should remove itself, but check anyway.
+    if [[ -e "${SELF_UPDATE_TEMP_SCRIPT}" ]] ; then
+        echo -e "${Yellow}WARNING: The self-update may have been partially unsuccessfull since a temporary copy of the self-update script failed to remove itself."
+        echo -e "You should probably try to run the command again.${Color_Off}"
+        read -r -p "Remove the temporary copy ${SELF_UPDATE_TEMP_SCRIPT}? (Y/n): "
+        if [[ ! ( $REPLY =~ ^[Nn] ) ]] ; then
+            rm "${SELF_UPDATE_TEMP_SCRIPT}"
+        fi
+    fi
 }
 
 function ld_command_self-update_help() {

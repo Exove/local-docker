@@ -87,3 +87,10 @@ for FILE in $LIST; do
 done
 
 echo -e "${Yellow}Optionally update your own .env.local file, too.${Color_Off}"
+
+if [[ "${BASH_SOURCE[0]}" == './self-update.sh' ]] ; then
+    # We are at project root, and with the script being in project root, it means
+    # that we are executing a copy made by docker/scripts/ld.command.self-update.sh
+    # so we should remove this temporary copy as the last step of execution.
+    rm "${BASH_SOURCE[0]}"
+fi

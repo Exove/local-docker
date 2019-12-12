@@ -101,7 +101,7 @@ echo
 echo -e "${Green}Local-docker updated to version ${BGreen}${RELEASE_NAME}${Green}.${Color_Off}"
 echo
 echo -e "${Yellow}Review and commit changes to: "
-for FILE in $LIST; do
+for FILE in "${UPDATE_TARGETS[@]}" ; do
     echo " - $FILE"
 done
 

@@ -2,6 +2,8 @@
 # File
 #
 # This file contains self-update -command for local-docker script ld.sh.
+# Strict mode (without strict IFS): http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
 # Get colors.
 if [ ! -f "./docker/scripts/ld.colors.sh" ]; then
     echo "File ./docker/scripts/ld.colors.sh missing."

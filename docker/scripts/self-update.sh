@@ -42,12 +42,19 @@ RELEASE_PUBLISHED=$(echo $EXISTS | grep -o -e '|\s*"published_at":[^|)]*' |cut -
 RELEASE_TARBALL=$(echo $EXISTS | grep -o -e '|\s*"tarball_url":[^|)]*' |cut -d'"' -f4)
 RELEASE_PAGE=$(echo $EXISTS | grep -o -e '|\s*"html_url":[^|)]*' |cut -d'"' -f4)
 RELEASE_BODY=$(echo $EXISTS | grep -o -e '|\s*"body":[^|)]*' |cut -d'"' -f4)
+RELEASE_TAG=${RELEASE_PAGE##*tag/}
 
-DIR=".ld-tmp-"$(date +%s)
-mkdir $DIR
 # Remove whitespaces we do not wish to deal with in filenames.
-RELEASE_NAME_CLEAN=$(echo $RELEASE_NAME | sed -e 's/^[[:space:]]*//')
-TEMP_FILENAME="release-${RELEASE_NAME_CLEAN}.tar.gz"
+RELEASE_TAG_CLEAN=$(echo $RELEASE_TAG | sed -e 's/^[[:space:]]*//')
+TEMP_FILENAME="release-${RELEASE_TAG_CLEAN}.tar.gz"
+
+# Use system temporary directory if available.
+if [[ ( -n "${TMPDIR}" ) && ( -d "${TMPDIR}" ) && ( -w "${TMPDIR}" ) ]] ; then
+    DIR="${TMPDIR}/local-docker/${RELEASE_TAG_CLEAN}"
+else
+    DIR=".ld-tmp-"$(date +%s)
+fi
+mkdir -p $DIR
 if [ -n "$RELEASE_TARBALL" ]; then
      # Latest git tags is the first one in the file.
     echo -e "Release name : ${BGreen} $RELEASE_NAME${Color_Off}"
@@ -56,9 +63,13 @@ if [ -n "$RELEASE_TARBALL" ]; then
     echo -e "Release info : "
     echo -e "${BGreen}$RELEASE_BODY${Color_Off}"
     echo
-    echo "Downloading release from $RELEASE_TARBALL, please wait..."
-    # -L to follow redirects
-    curl -L -s -o "$DIR/$TEMP_FILENAME" $RELEASE_TARBALL
+    if [[ -e "${DIR}/${TEMP_FILENAME}" ]] ; then
+        echo -e "Using cached release tarball found at ${DIR}/${TEMP_FILENAME} ..."
+    else
+        echo "Downloading release from $RELEASE_TARBALL, please wait..."
+        # -L to follow redirects
+        curl -L -s -o "$DIR/$TEMP_FILENAME" $RELEASE_TARBALL
+    fi
 fi
 
 # Curl creates an ASCII file out of 404 response. Let's see what we have in the file.
@@ -76,8 +87,6 @@ for FILE in $LIST; do
     cp -fr "$DIR/$SUBDIR/$FILE" .
 done
 
-# Remove temp dir, but take precautions, the DIR value must not remove root (/).
-rm -rf "$(pwd)/$DIR"
 echo
 echo -e "${Green}Local-docker updated to version ${BGreen}${RELEASE_NAME}${Green}.${Color_Off}"
 echo

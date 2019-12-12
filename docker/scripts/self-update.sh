@@ -18,8 +18,8 @@ TAG=${1:-latest}
 # Check the tag exists if one was provided.
 if [ $# -ne 0 ]; then
     echo "Looking for tag ${TAG}, please wait..."
-    CURL="curl -sL https://api.github.com/repos/Exove/local-docker/releases/tags/${TAG}"
-    EXISTS=$($CURL | grep -e '"name":' -e '"html_url":.*local-docker' -e '"published_at":' -e '"tarball_url":' -e '"body":' | tr '\n' '|')
+    URL="https://api.github.com/repos/Exove/local-docker/releases/tags/${TAG}"
+    EXISTS=$(curl -sL "${URL}" | grep -e '"name":' -e '"html_url":.*local-docker' -e '"published_at":' -e '"tarball_url":' -e '"body":' | tr '\n' '|')
     if [ -z "$EXISTS"  ]; then
         echo -e "${Red}ERROR: The tag release was not found.${Color_Off}"
         exit 2
@@ -27,8 +27,8 @@ if [ $# -ne 0 ]; then
 else
     echo "Requesting the latest release info, please wait..."
     # GET /repos/:owner/:repo/releases/latest
-    CURL="curl -sL https://api.github.com/repos/Exove/local-docker/releases/latest"
-    EXISTS=$($CURL | grep -e '"name":' -e '"html_url":.*local-docker' -e '"published_at":' -e '"tarball_url":' -e '"body":' | tr '\n' '|')
+    URL="https://api.github.com/repos/Exove/local-docker/releases/latest"
+    EXISTS=$(curl -sL "${URL}" | grep -e '"name":' -e '"html_url":.*local-docker' -e '"published_at":' -e '"tarball_url":' -e '"body":' | tr '\n' '|')
     if [ -z "$EXISTS"  ]; then
         echo -e "${Red}ERROR: No information about the latest release available.${Color_Off}"
         exit 3

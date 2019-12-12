@@ -5,7 +5,7 @@
 
 # Restore one database from backup.
 function ld_command_db-import_exec() {
-    DBNAME=${1:$-${MYSQL_DATABASE:-drupal}}
+    DBNAME=${1:-${MYSQL_DATABASE:-drupal}}
     if [ -z "$DBNAME" ]; then
       echo -e "${Red}ERROR: No database name provided nor found.${Color_Off}"
       return 1

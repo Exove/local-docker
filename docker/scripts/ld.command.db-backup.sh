@@ -11,7 +11,7 @@ function ld_command_db-backup_exec() {
       return 1
     fi
 
-    DATE=$(date +%Y-%m-%d--%H-%I-%S)
+    DATE=$(date +%Y-%m-%d--%H-%M-%S)
     FILENAME="db-backup--${DBNAME}--$DATE.sql.gz"
     COMMAND_SQL_DB_DUMPER="mysqldump --host "${CONTAINER_DB:-db}" -uroot -p"$MYSQL_ROOT_PASSWORD" --lock-all-tables --compress --flush-logs --flush-privileges  --dump-date --tz-utc --verbose ${DBNAME} 2>/dev/null | gzip --fast -f > /var/db_dumps/${FILENAME}"
 

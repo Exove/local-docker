@@ -1,6 +1,6 @@
 # This file contains default .gitignore rules. To use it, copy it to .gitignore,
 # and it will cause files like your Docker-sync cache and environment specific
-# configuration (.env file) to be excluded from Git version control.
+# configuration (.env.local file) to be excluded from Git version control.
 # This is a common strategy to avoid accidentally including private information
 # in public repositories and patch files.
 

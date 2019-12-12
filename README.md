@@ -68,8 +68,8 @@ Copy all of this repository on top of your current project.
 
     db_dumps/
     docker/
-    .ld.config.example 
     .env.example 
+    .env.local.example 
     .gitignore.example # (or copy rules to your existing .gitignore)
     ld.sh 
     ld  # (ensure you have this symlinking to correct ld.sh)
@@ -98,7 +98,7 @@ subdomains:
 
 - main project - [http://example.com]() and [http://www.example.com]()
 - MySQL database - [mysql://$LOCAL_IP:3306](mysql://$LOCAL_IP:3306)
-  (`LOCAL_IP` address is defined in the `.ld.config` file)
+  (`LOCAL_IP` address is defined in the `.env` file)
 - Adminer (Web UI for MySQL) -
   [http://**adminer**.example.com](http://adminer.example.com)
 - Mailhog (catches **all** emails) -
@@ -141,16 +141,16 @@ Once the local is up and running you can install Drupal.
        [http://adminer.example.com](http://adminer.example.com)
     
    3.  or use your favourite SQL GUI app (SequelPro or similar), and
-       connect using LOCAL_IP (see `.ld.config` file, `127.0.X.Y`),
+       connect using LOCAL_IP (see `.env` file, `127.0.X.Y`),
        default port `3306`, username `root` and password from your
-       `.ld.config` file, `MYSQL_ROOT_PASSWORD`.
+       `.env` file, `MYSQL_ROOT_PASSWORD`.
  
 #### Skeleton
 
 If you are applying Local-docker on a Skeleton based project start by
 copying all things mentioned in "Start using local-docker" -section on
 top of your project repository and copy all environment variables from.
-`.ld.config.example` to your own `.ld.config` file.
+`.env.example` to your own `.env` file.
 
     $ ./ld init skeleton
 
@@ -328,7 +328,7 @@ loopback interface) and therefore you can run several projects in
 parallel.
 
 In case there are port collisions first thing to check is you have
-`.ld.config` file with `LOCAL_IP` set to something other than `127.0.0.1`.
+`.env` file with `LOCAL_IP` set to something other than `127.0.0.1`.
 `./ld init` sets up a random IP address from range `127.0.0.0/16`.
 
 You can change IP address by putting your local down (`./ld down`),
@@ -349,12 +349,12 @@ Local-docker configuration is defined in `./ld.config`  file, which is
 created during `./ld init` process. The file should be committed to
 project repository and be shared among all developers. 
 
-Local overrides can be set via `.env`  file, for example to have
+Local overrides can be set via `.env.local`  file, for example to have
 different local development domain or IP address. This file should not
 be committed to project repository but be considered private.
 
-Variables present in the `.env` file will override project level
-configurations from `.ld.config`.
+Variables present in the `.env.local` file will override project level
+configurations from `.env`.
 
 These file should contain key=value -pairs, such as
 

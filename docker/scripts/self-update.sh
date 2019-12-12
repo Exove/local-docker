@@ -14,13 +14,9 @@ fi
 
 # When no tag is provided we'll fallback to use the 'latest'.
 TAG=${1:-latest}
-TAG_PROVIDED=
-if [ -n "$1" ];then
-    TAG_PROVIDED=1
-fi
 
-# Check the tag exists if one is provided.
-if [ -n "$TAG_PROVIDED" ]; then
+# Check the tag exists if one was provided.
+if [ $# -ne 0 ]; then
     echo "Looking for tag ${TAG}, please wait..."
     CURL="curl -sL https://api.github.com/repos/Exove/local-docker/releases/tags/${TAG}"
     EXISTS=$($CURL | grep -e '"name":' -e '"html_url":.*local-docker' -e '"published_at":' -e '"tarball_url":' -e '"body":' | tr '\n' '|')

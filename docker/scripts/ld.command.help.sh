@@ -46,10 +46,18 @@ function ld_command_extended_help_exec() {
     if [[ -f "$FILE" ]]; then
         . $FILE
         FUNCTION="ld_command_"$COMMAND"_help"
-        function_exists $FUNCTION && echo && echo -n "$COMMAND: $($FUNCTION)" && echo
+        function_exists $FUNCTION && echo -n "    $COMMAND: $($FUNCTION)" && echo
 
         FUNCTION="ld_command_"$COMMAND"_extended_help"
-        function_exists $FUNCTION && echo && echo -n "$($FUNCTION)" && echo && echo
+        if function_exists $FUNCTION; then
+            STRINGS=$($FUNCTION)
+            if [ -n "$STRINGS" ]; then
+                echo
+            fi
+            for string in $STRINGS; do
+                echo -n "    $string" && echo
+            done
+        fi
 
     fi
 

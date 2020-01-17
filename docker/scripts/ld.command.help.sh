@@ -32,7 +32,7 @@ function ld_command_general_help_exec() {
       if [[ -f "$FILE" ]]; then
           . $FILE
           FUNCTION="ld_command_"$COMMAND"_help"
-          function_exists $FUNCTION && echo -n "  - $COMMAND: $($FUNCTION)" && echo
+          function_exists $FUNCTION && echo -e "  - ${BGreen}$COMMAND${Color_Off}: $($FUNCTION)"
 
       fi
     done
@@ -46,19 +46,23 @@ function ld_command_extended_help_exec() {
     if [[ -f "$FILE" ]]; then
         . $FILE
         FUNCTION="ld_command_"$COMMAND"_help"
-        function_exists $FUNCTION && echo -n "    $COMMAND: $($FUNCTION)" && echo
+        function_exists $FUNCTION && echo && echo -e "${BGreen}$COMMAND${Color_Off}: $($FUNCTION)" && echo
 
         FUNCTION="ld_command_"$COMMAND"_extended_help"
         if function_exists $FUNCTION; then
             STRINGS=$($FUNCTION)
-            if [ -n "$STRINGS" ]; then
-                echo
-            fi
-            for string in $STRINGS; do
-                echo -n "    $string" && echo
-            done
-        fi
+            #Set the field separator to new line
+            OIFS="$IFS"
+            IFS=$'\n'
 
+            for LINE in $STRINGS; do
+                echo "    $LINE"
+            done
+            IFS="$OIFS"
+        else
+            echo "    No extended help for ${COMMAND} available."
+        fi
+        echo
     fi
 
 }

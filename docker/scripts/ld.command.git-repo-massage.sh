@@ -64,12 +64,13 @@ function ld_command_git-repo-massage_exec() {
 }
 
 function ld_command_git-repo-massage_help() {
-    echo "Tries to flatten your git history and update remote paths. 1st argument set to FORCE ignores security checks and flattens your local master branch history to single commit."
+    echo "Tries to flatten your git history and update remote paths."
+#    echo "Tries to flatten your git history and update remote paths. 1st argument set to FORCE ignores security checks and flattens your local master branch history to single commit."
 }
 
 function ld_command_git-repo-massage_extended_help() {
     echo "This is used to clean project repository history and to connect repository to new project remote."
     echo
     echo "Example: $SCRIPT_NAME_SHORT git-repo-massage "
-    echo "Example: $SCRIPT_NAME_SHORT git-repo-massage FORCE # to ignore commit hash checks"
+#    echo "Example: $SCRIPT_NAME_SHORT git-repo-massage FORCE # to ignore commit hash checks"
 }

@@ -35,6 +35,12 @@ function ld_command_init_exec() {
         esac
     fi
 
+    # Check first to flatten the git repo history fully.
+    # Git repo must match local-docker origin and commit has be known initial
+    # commit has of local-docker.
+    # Without these matching nothing will be done.
+    $SCRIPT_NAME git-repo-massage
+
     echo
     echo -e "${BBlack}== General setup ==${Color_Off}"
 

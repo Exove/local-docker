@@ -48,8 +48,8 @@ function ld_command_git-repo-massage_exec() {
     fi
 
     if [ "$GIT_COMMIT_MATCH" -gt "0" ] && [ "$GIT_REPO_MATCH" -eq "0" ]; then
-        [ "$LD_VERBOSE" -ge "1" ] && echo -e "${BYellow}INFO: ${Yellow}Your Git history will be reduce to a single commit now (in 4 secs)."
-        sleep 4
+        [ "$LD_VERBOSE" -ge "1" ] && echo -ne "${BYellow}INFO: ${Yellow}Your Git history will be reduce to a single commit now (in 5 secs)."
+        [ "$LD_VERBOSE" -ge "1" ] && timer 5
         git checkout --orphan master-new
         git commit -am "Initial commit from local-docker v.${LOCAL_DOCKER_VERSION}"
         git branch -D master

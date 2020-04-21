@@ -51,7 +51,9 @@ function ld_command_git-repo-massage_exec() {
         [ "$LD_VERBOSE" -ge "1" ] && echo -ne "${BYellow}INFO: ${Yellow}Your Git history will be reduce to a single commit now (in 5 secs)."
         [ "$LD_VERBOSE" -ge "1" ] && timer 5
         git checkout --orphan master-new
-        git commit -am "Initial commit from local-docker v.${LOCAL_DOCKER_VERSION}"
+        # Remove files related to local-dockers Github repository management.
+        rm -rf .github
+        git commit -aqm "Initial commit from local-docker v.${LOCAL_DOCKER_VERSION}"
         git branch -D master
         git branch -m master-new master
     else

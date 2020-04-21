@@ -15,7 +15,7 @@ function ld_command_git-repo-massage_exec() {
     [ "$LD_VERBOSE" -ge "2" ] && [ "$GIT_COMMIT_MATCH" -gt "0" ] && echo "Initial Git commit matches known initial commit hash in Exove/local-docker.git"
 
     # This catches both https and ssh based remote addresses.
-    GIT_REPO_MATCH=$(git config --get remote.origin.url | grep -c 'Exove/local-docker.git')
+    GIT_REPO_MATCH=$(git config --get remote.origin.url | egrep -c 'Exove\/local\-docker\.git$')
 
     [ "$LD_VERBOSE" -ge "2" ] && [ "$GIT_REPO_MATCH" -gt "0" ] && echo "Git repository is connected to Exove/local-docker.git"
 

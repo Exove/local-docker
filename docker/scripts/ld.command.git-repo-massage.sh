@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # File
 #
-# This file contains git-repo-massage -command for local-docker script ld.sh.
+# This file contains git-repo-massage command for local-docker script ld.sh.
 
 function ld_command_git-repo-massage_exec() {
 

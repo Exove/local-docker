@@ -30,12 +30,12 @@ function ld_command_git-repo-massage_exec() {
             echo "If you leave this empty Git remote will not be edited."
             read -p "Git repository address: " ANSWER
              # Very simple test to see we have .git at the end of remote url.
-            TEST=$(echo $ANSWER | egrep -e '.*\.git$')
-            if [ -z "$ANSWER" ] || [ "${#TEST}" -gt 0 ]; then
+            TEST_HAS_DOTGIT=$(echo $ANSWER | egrep -e '.*\.git$')
+            TEST_HAS_SPACES=$(echo $ANSWER | egrep -e '\s')
+            if [ -z "$ANSWER" ] || ( [ "${#TEST_HAS_DOTGIT}" -gt "0" ] && [ "${#TEST_HAS_SPACES}" -eq "0" ] ); then
                 VALID=1
             else
-                echo -e "${Red}ERROR: Git repository address is invalid. Please try again.${Color_Off}"
-                sleep 1
+                echo -e "${Red}ERROR: Git repository address is invalid. Please try again. No spaces allowed, must end with '.git'.${Color_Off}"
                 echo
             fi
         done

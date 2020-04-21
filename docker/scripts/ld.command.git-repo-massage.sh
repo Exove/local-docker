@@ -39,7 +39,7 @@ function ld_command_git-repo-massage_exec() {
                 echo
             fi
         done
-        if [ ! -z "$ANSWER" ]; then
+        if [ -n "$ANSWER" ]; then
             git remote set-url origin $ANSWER
             [ "$LD_VERBOSE" -ge "2" ] && echo -e "${BYellow}INFO: ${Yellow}Git remotes (all):" && git remote -v
             [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Color_Off}"

@@ -75,7 +75,7 @@ and start the initialisation.
     $ cd my-project
     $ ./ld init [TEMPLATE-NAME]
 
-Init will ask you new Git repository address and flattens the local-docker
+Init will ask you for your new Git repository address and flatten the local-docker
 commit history to single init commit.
 
 It will ask you details about your project and set your local development up

@@ -29,7 +29,7 @@ function ld_command_git-repo-massage_exec() {
             echo "It is YOUR responsibility to ensure it is correct and functional. However local-docker does not touch your git remote, ever."
             echo "If you leave this empty Git remote will not be edited."
             read -p "Git repository address: " ANSWER
-#            # Very simple test to see we have .git at the end of remote url.
+             # Very simple test to see we have .git at the end of remote url.
             TEST=$(echo $ANSWER | egrep -e '.*\.git$')
             if [ -z "$ANSWER" ] || [ "${#TEST}" -gt 0 ]; then
                 VALID=1

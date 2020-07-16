@@ -459,9 +459,9 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
 
       while [ "${#CURRENTLY_CHECKED}" -gt "1"  ] && [ –z "$FOUND"] ; do
 
-        [ -x "${CURRENTLY_CHECKED}/ld.sh" ] && FOUND=1
+        [ -x "${CURRENTLY_CHECKED}/ld.sh" ] && FOUND="1"
 
-        if [ "$FOUND" -eq "1" ]; then
+        if [ -n "$FOUND" ]; then
           ${CURRENTLY_CHECKED}/ld.sh "$@"
           # Pass the recevied return code as-is.
           return $?

@@ -449,9 +449,9 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
     # Local-docker tool
     #
     # This shell function travers upwards in the folder tree starting form the
-    # current folder up to user's home folder (or filesystem root).
-    # If ld.sh file is found and is executable shell script, execute it passing all
-    # provided paramters to it.
+    # current folder and up to the user's home folder (or filesystem root).
+    # If ld.sh file is found and is executable shell script, execute it passing
+    # all provided arguments forward.
     #
     function ld() {
       CURRENTLY_CHECKED=`pwd`

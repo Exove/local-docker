@@ -173,6 +173,7 @@ services:
 
     volumes:
       - solr_data:/var/solr
+      - ./configs/solr:/solr-config
     # In case of several env files later declared variable
     # values override earlier ones
     env_file:
@@ -181,7 +182,8 @@ services:
     restart: on-failure
     command:
       - solr-precreate
-      - gettingstarted
+      - "${SOLR_CORE}"
+      - /solr-config
 
   adminer:
     image: adminer:4.7.3

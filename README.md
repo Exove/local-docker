@@ -430,15 +430,55 @@ for IDE to setup a Xdebug listener to the port Xdebug is trying to
 connect to on your host. Port `9010` is being used to avoid collision
 with possible running `php-fpm` on the host machine port `9000`.
 
-#### Convenience "alias" for ./ld.sh
+#### Project level alias for ./ld.sh
 
-If you find the `./` prefix tedious when using ld, you could add the following
-alias to your shell startup files. In order to not interfere with `/usr/bin/ld`,
-`ld` as alias should be avoided.
+You can set up a "local-docker finder" via Bash/Zsh function, which will try to
+find the project's ld.sh script, and pass command name and other argumets to it.
 
-    function lld() { if [[ -x "$(pwd)/ld.sh" ]] ; then "$(pwd)/ld.sh" $@; else echo "ld.sh not found in current directory"; fi }
+Add this to your `~/.zshrc` or `~/.bashrc`:
 
-Then, you can use `lld` instead of `./ld` or `./ld.sh`
+    # Local-docker tool
+    #
+    # This shell function travels upwards in the directory tree starting from the
+    # current directory and up to the user's home directory (or filesystem root).
+    # If the ld.sh file is found and is an executable shell script, execute it passing
+    # all provided arguments forward.
+    #
+    function ld() {
+      CURRENTLY_CHECKED=`pwd`
+      FOUND=
+
+      while [ "${#CURRENTLY_CHECKED}" -gt "1"  ] && [ –z "$FOUND"] ; do
+
+        [ -x "${CURRENTLY_CHECKED}/ld.sh" ] && FOUND="1"
+
+        if [ -n "$FOUND" ]; then
+          ${CURRENTLY_CHECKED}/ld.sh "$@"
+          # Pass the received return code as-is.
+          return $?
+        else
+          # Shorten the directory path by one.
+          NEXT_UP=`dirname $CURRENTLY_CHECKED`
+          #If we reached the user's home directory, stop.
+          if [ "$CURRENTLY_CHECKED" = "$HOME" ]; then
+            echo "ld.sh not found in this or any of the parent directories. Traversed up the tree until reached home directory ($HOME)."
+            return 1
+          elif [ "${#NEXT_UP}" -eq "1"  ]; then
+            echo "ld.sh not found in this or any of the parent directories. Traversed up the tree until reached the filesystem root."
+            return 1
+          fi
+          CURRENTLY_CHECKED=$NEXT_UP
+        fi
+
+      done
+    }
+
+
+Source the file (or start a new shell window) and you can use `ld` to execute
+your local-docker commands.
+
+In order to not interfere with [`/usr/bin/ld`](https://linux.die.net/man/1/ld), you may use another name besides
+`ld` as function name. However, it is quite rarely used a command.
 
 #### Update local-docker itself
 

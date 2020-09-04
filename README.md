@@ -473,7 +473,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
             echo "ld.sh not found in this or any of the parent directories. Traversed up the tree until reached home directory ($HOME)."
             return 1
           elif [ "${#NEXT_UP}" -eq "1"  ]; then
-            echo "ld.sh not found in this or any of the parent folders. Traversed up the tree until reached the filesystem root."
+            echo "ld.sh not found in this or any of the parent directories. Traversed up the tree until reached the filesystem root."
             return 1
           fi
           CURRENTLY_CHECKED=$NEXT_UP

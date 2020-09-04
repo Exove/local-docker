@@ -448,7 +448,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
 
     # Local-docker tool
     #
-    # This shell function travers upwards in the folder tree starting form the
+    # This shell function travels upwards in the directory tree starting from the
     # current directory and up to the user's home directory (or filesystem root).
     # If the ld.sh file is found and is an executable shell script, execute it passing
     # all provided arguments forward.

@@ -466,7 +466,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
           # Pass the recevied return code as-is.
           return $?
         else
-          # Shorten the folder path by one directory.
+          # Shorten the directory path by one.
           NEXT_UP=`dirname $CURRENTLY_CHECKED`
           #If we reached the user's home folder stop.
           if [ "$CURRENTLY_CHECKED" = "$HOME" ]; then

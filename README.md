@@ -463,7 +463,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
 
         if [ -n "$FOUND" ]; then
           ${CURRENTLY_CHECKED}/ld.sh "$@"
-          # Pass the recevied return code as-is.
+          # Pass the received return code as-is.
           return $?
         else
           # Shorten the directory path by one.

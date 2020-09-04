@@ -24,7 +24,7 @@ echo "==============================${reset}"
 
 
 # Restricted branches. See README.md for details.
-restricted_branches_list=("master development staging production")
+restricted_branches_list=("main master development staging production")
 
 # Debugging functions to be checked.
 keywords=(dpm dpq dvm ddebug_backtrace print_r var_dump debug_backtrace console\.log kint)

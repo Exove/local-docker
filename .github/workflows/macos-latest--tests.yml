@@ -3,7 +3,7 @@ name: Test build and commands with macOS-latest
 on:
   pull_request:
     branches:
-    - master
+    - main
 
 jobs:
   build:
@@ -30,7 +30,7 @@ jobs:
 
     - name: Check Virtualbox path
       run: which virtualbox
-      
+
     - name: Check lo0
       run: ifconfig lo0
 

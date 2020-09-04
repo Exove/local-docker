@@ -39,9 +39,9 @@ if [[ ! "$RELEASE_TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 fi
 
 BRANCH=`git rev-parse --abbrev-ref HEAD`
-if [ "$BRANCH" != "master" ]; then
+if [ "$BRANCH" != "main" ]; then
   echo "You are on a wrong branch: $BRANCH"
-  echo "Releases shall be done solely on master"
+  echo "Releases shall be done solely on main."
   exit 5
 fi
 

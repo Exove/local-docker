@@ -48,14 +48,14 @@ function ld_command_git-repo-massage_exec() {
     fi
 
     if [ "$GIT_COMMIT_MATCH" -gt "0" ] && [ "$GIT_REPO_MATCH" -eq "0" ]; then
-        [ "$LD_VERBOSE" -ge "1" ] && echo -ne "${BYellow}INFO: ${Yellow}Your Git history will be reduce to a single commit now (in 5 secs)."
+        [ "$LD_VERBOSE" -ge "1" ] && echo -ne "${BYellow}INFO: ${Yellow}Your Git history will be reduced to a single commit now (in 5 secs)."
         [ "$LD_VERBOSE" -ge "1" ] && timer 5
-        git checkout --orphan master-new
+        git checkout --orphan main-tmp
         # Remove files related to local-dockers Github repository management.
         rm -rf .github
         git commit -aqm "Initial commit from local-docker v.${LOCAL_DOCKER_VERSION}"
-        git branch -D master
-        git branch -m master-new master
+        git branch -D main
+        git branch -m main-tmp main
     else
         [ "$LD_VERBOSE" -ge "2" ] && echo "Commit hash check done, looks like the the git history has been massaged already."
     fi

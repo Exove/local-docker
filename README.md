@@ -468,7 +468,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
         else
           # Shorten the directory path by one.
           NEXT_UP=`dirname $CURRENTLY_CHECKED`
-          #If we reached the user's home folder stop.
+          #If we reached the user's home directory, stop.
           if [ "$CURRENTLY_CHECKED" = "$HOME" ]; then
             echo "ld.sh not found in this or any of the parent directories. Traversed up the tree until reached home directory ($HOME)."
             return 1

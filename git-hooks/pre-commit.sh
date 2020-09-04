@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Source: https://github.com/manoj-apare/pre-commit, slightly modified.
 #
@@ -109,7 +109,7 @@ if [ -n "$files_changed" ]; then
       # Find debugging function exists in file diff one by one.
       pattern="^\+(.*)?$keyword\s*\((.*)?"
       result_for_file=`git diff --cached $FILE | egrep -x "$pattern"`
-      if [ ! -z "$result_for_file" ]; then
+      if [ -n "$result_for_file" ]; then
         debugging_function_found=1
         errors_found=$((errors_found + 1))
         if [ $debugging_function_found -eq 1 ]; then
@@ -163,7 +163,7 @@ if [ -n "$files_changed" ]; then
     # Find debugging function exists in file diff one by one.
     pattern="(<<<<|====|>>>>)+.*(\n)?"
     result_for_file=`egrep -in "$pattern" $FILE`
-    if [ ! -z "$result_for_file" ]; then
+    if [ -n "$result_for_file" ]; then
       merge_conflict_marker=1
       errors_found=$((errors_found + 1))
       if [ $merge_conflict_marker -eq 1 ]; then

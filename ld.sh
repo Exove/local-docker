@@ -50,7 +50,7 @@ else
 fi
 
 IGNORE_INIT_STATE=0
-WHITELIST_COMMANDS=("help" "self-update" "init")
+WHITELIST_COMMANDS=("help" "self-update" "init" "git-repo-massage")
 element_in "$ACTION" "${WHITELIST_COMMANDS[@]}"
 if [ "$?" -eq "0" ]; then
     IGNORE_INIT_STATE=1

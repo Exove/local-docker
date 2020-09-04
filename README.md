@@ -73,22 +73,13 @@ and start the initialisation.
 
     $ git clone git@github.com:Exove/local-docker.git my-project
     $ cd my-project
-    # Reconfigure first git remote 'origin' (so you do not push to
-    # local-docker -repository by mistake).
-    $ git remote set-url origin ssh://git.example.com/my-project.git
-    # Verify you have correct remote url's.
-    $ git remote -v
-    # Create a disconnected temporary branch w/ no commits. This new
-    # branch is not connected to the old repository branches.
-    $ git checkout --orphan master-new
-    # Commit clean project base to the new and still empty branch.
-    $ git commit -am 'Initial commit for my-project from local-docker'
-    # Delete old master branch (with the full commit history), and
-    # rename your temporary branch to master.
-    $ git branch -D master
-    $ git branch -m master-new master
-    $ git push
     $ ./ld init [TEMPLATE-NAME]
+
+Init will ask you for your new Git repository address and flatten the local-docker
+commit history to single init commit.
+
+It will ask you details about your project and set your local development up
+based on the information provided. Finally it will start your local.
 
 #### Existing project
 

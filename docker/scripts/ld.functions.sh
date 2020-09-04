@@ -250,3 +250,21 @@ function project_config_file_check () {
 
     return 0
 }
+
+# Timer.
+#
+# Echoes dot per second.
+#
+# @param int
+#   Number of seconds to spend timing.
+function timer () {
+    # Make any string to integer, defaulting to 5 (seconds).
+    WAIT=$((${1:-5} + 0))
+    # Both .env AND docker-compose.yml file must be present to define project as initialized.
+    while [ $WAIT -gt 0 ]; do
+        echo -n "."
+        ((WAIT--))
+        sleep 1
+    done
+    echo
+}

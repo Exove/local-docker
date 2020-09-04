@@ -470,7 +470,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
           NEXT_UP=`dirname $CURRENTLY_CHECKED`
           #If we reached the user's home folder stop.
           if [ "$CURRENTLY_CHECKED" = "$HOME" ]; then
-            echo "ld.sh not found in this or any of the parent folders. Traversed up the tree until reached home folder ($HOME)."
+            echo "ld.sh not found in this or any of the parent directories. Traversed up the tree until reached home directory ($HOME)."
             return 1
           elif [ "${#NEXT_UP}" -eq "1"  ]; then
             echo "ld.sh not found in this or any of the parent folders. Traversed up the tree until reached the filesystem root."

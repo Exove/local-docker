@@ -450,7 +450,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
     #
     # This shell function travers upwards in the folder tree starting form the
     # current folder and up to the user's home folder (or filesystem root).
-    # If ld.sh file is found and is executable shell script, execute it passing
+    # If the ld.sh file is found and is an executable shell script, execute it passing
     # all provided arguments forward.
     #
     function ld() {

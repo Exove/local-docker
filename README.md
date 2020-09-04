@@ -486,7 +486,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
 Source the file (or start a new shell window) and you can use `ld` to execute
 your local-docker commands.
 
-In order to not interfere with `/usr/bin/ld`, you may use another name besides
+In order to not interfere with [`/usr/bin/ld`](https://linux.die.net/man/1/ld), you may use another name besides
 `ld` as function name. However, it is quite rarely used command.
 
 #### Update local-docker itself

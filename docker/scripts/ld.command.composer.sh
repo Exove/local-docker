@@ -14,7 +14,7 @@ function ld_command_composer_exec() {
       return 2
     fi
 
-    COMM="docker-compose exec -T ${CONTAINER_PHP:-php} /usr/local/bin/composer -vv $@"
+    COMM="docker-compose exec -T -e COMPOSER_MEMORY_LIMIT=-1 ${CONTAINER_PHP:-php} /usr/local/bin/composer -vv $@"
     [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}Next: $COMM${Color_Off}"
     $COMM
 }

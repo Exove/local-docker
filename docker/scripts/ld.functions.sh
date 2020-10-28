@@ -3,6 +3,20 @@
 #
 # This file contains functions for local-docker script ld.sh.
 
+# Command to return the executable.
+# Some future day this will return path to
+# - /path/to/docker-compose OR
+# - /path/to/mutagen compose (Mutagen.io wrapper to docker-compose)
+function compose_command() {
+    COMMAND=$(which docker-compose)
+    if [ "$?" -ne "0" ]; then
+        exit 1
+    fi
+    # NOTE .env / .env.local files have not yet been sourced, so the custom
+    # variables are not yet present.
+    echo $COMMAND
+}
+
 function find_container() {
     if [ -z "$1" ]; then
         return 1

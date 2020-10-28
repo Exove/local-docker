@@ -13,7 +13,7 @@ function ld_command_phpcbf_exec() {
       echo -e "${Red}ERROR: PHP container ('${CONTAINER_PHP:-php}')is not up.${Color_Off}"
       return 2
     fi
-    COMM="docker-compose exec -T ${CONTAINER_PHP:-php} /var/www/vendor/bin/phpcbf $@"
+    COMM=$(compose_command) " exec -T ${CONTAINER_PHP:-php} /var/www/vendor/bin/phpcbf $@"
     [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}Next: $COMM${Color_Off}"
     $COMM
 }

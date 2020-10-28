@@ -55,17 +55,17 @@ function ld_command_db-restore_exec() {
     echo
     if [ "$LD_VERBOSE" -ge "1" ]; then
         echo -e "${Yellow}Databases before the db-restore:${Color_Off}"
-        docker-compose -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_RESTORE_INFO 2>/dev/null"
+        $(compose_command) -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_RESTORE_INFO 2>/dev/null"
         echo
         echo "Verifying database backup file is found in the container, please wait..."
-        docker-compose -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "[ -e "/var/${TARGET_FILE_NAME}" ] || echo 'File not found. Please place file inside db_dumps/ folder and provide full path (db_dumps/MY-FILE.tar.gz).'"
+        $(compose_command) -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "[ -e "/var/${TARGET_FILE_NAME}" ] || echo 'File not found. Please place file inside db_dumps/ folder and provide full path (db_dumps/MY-FILE.tar.gz).'"
         echo "Please wait..."
-        docker-compose -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_RESTORER 2>/dev/null"
+        $(compose_command) -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_RESTORER 2>/dev/null"
         echo
         echo -e "${Yellow}Databases after the db-restore${Color_Off}"
-        docker-compose -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_RESTORE_INFO 2>/dev/null"
+        $(compose_command) -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_RESTORE_INFO 2>/dev/null"
         echo -e "${Yellow}Users after the db-restore${Color_Off}"
-        docker-compose -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_USERS 2>/dev/null"
+        $(compose_command)-f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_USERS 2>/dev/null"
     fi
   }
 

@@ -8,7 +8,7 @@ function ld_command_rebuild_exec() {
     [ "$LD_VERBOSE" -lt "1" ] $SCRIPT_NAME down 2&>/dev/null
     # Return value is not important here.
     [ "$LD_VERBOSE" -ge "1" ] && echo "(re)Building containers, please wait..."
-    docker-compose -f $DOCKER_COMPOSE_FILE build
+    $(compose_command) -f $DOCKER_COMPOSE_FILE build
     $SCRIPT_NAME up
     $SCRIPT_NAME db-restore
 }

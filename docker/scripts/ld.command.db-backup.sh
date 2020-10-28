@@ -24,7 +24,7 @@ function ld_command_db-backup_exec() {
           ;;
 
         2|"2")
-          COMM="docker-compose -f $DOCKER_COMPOSE_FILE  up -d $CONTAINER_DB"
+          COMM=$(compose_command) " -f $DOCKER_COMPOSE_FILE  up -d $CONTAINER_DB"
           [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Yellow}Starting DB container for backup purposes.${Color_Off}"
           $COMM
           STARTED=1
@@ -37,15 +37,15 @@ function ld_command_db-backup_exec() {
     esac
 
     [ "$LD_VERBOSE" -ge "1" ] && echo -e "${Yellow}Using datestamp: $DATE${Color_Off}"
-    [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}NEXT: docker-compose -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c $COMMAND_SQL_DB_DUMPER${Color_Off}"
+    [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}NEXT: "$(compose_command) " -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c $COMMAND_SQL_DB_DUMPER${Color_Off}"
 
-    docker-compose -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_DUMPER"
+    $(compose_command) -f $DOCKER_COMPOSE_FILE exec -T ${CONTAINER_DB:-db} sh -c "$COMMAND_SQL_DB_DUMPER"
     cd $PROJECT_ROOT/${DATABASE_DUMP_STORAGE:-db_dumps}
     ln -sf ${FILENAME} db-backup--${DBNAME}--LATEST.sql.gz
 
     if [ -n "$STARTED" ]; then
        [ "$LD_VERBOSE" -ge "1" ] && echo -e "${Yellow}Stopping DB container.${Color_Off}"
-       COMM="docker-compose -f $DOCKER_COMPOSE_FILE stop $CONTAINER_DB"
+       COMM=$(compose_command) " -f $DOCKER_COMPOSE_FILE stop $CONTAINER_DB"
         [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}Next: $COMM${Color_Off}"
        $COMM
     fi

@@ -18,7 +18,7 @@ function ld_command_nuke-volumes_exec() {
         sleep 1
     done
     echo
-    docker-compose -f $DOCKER_COMPOSE_FILE down
+    $(compose_command) -f $DOCKER_COMPOSE_FILE down
     if is_dockersync; then
         [ "$LD_VERBOSE" -ge "1" ] && echo 'Turning off docker-sync (clean), please wait...'
         docker-sync clean

@@ -11,7 +11,7 @@ function ld_command_down_exec() {
         exit 1
     fi
 
-    COMM="docker-compose -f $DOCKER_COMPOSE_FILE down"
+    COMM=$(compose_command) " -f $DOCKER_COMPOSE_FILE down"
     [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}Next: $COMM${Color_Off}"
     $COMM
 

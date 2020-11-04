@@ -1,4 +1,4 @@
-FROM xoxoxo/php-drupal:7.3-1.1
+FROM xoxoxo/php-drupal:7.3-1.2
 
 # Configure PHP for local development.
 COPY ./conf.d/90-mailhog.ini /usr/local/etc/php/conf.d/90-mailhog.ini

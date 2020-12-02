@@ -139,6 +139,9 @@ services:
       # unless stack is down'ed with "--volumes":
       # $ docker-compose down --volumes
       - db_data:/var/lib/mysql
+      # Custom MySQL configs.
+      - ./docker/configs/mysql/development.cnf:/etc/mysql/conf.d/development.cnf
+      - ./docker/configs/mysql/force-utf8mb4.cnf:/etc/mysql/conf.d/force-utf8mb4.cnf
     # In case of several env files later declared variable
     # values override earlier ones
     env_file:
@@ -146,8 +149,6 @@ services:
       - .env.local
     restart: on-failure
     working_dir: /var
-    # Set max_allowed_packet to 256M (or any other value)
-    command: --max_allowed_packet=268435456
 
   # Maybe use this instead of the one set blow here: https://hub.docker.com/r/eeacms/varnish/
   # varnish:

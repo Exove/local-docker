@@ -1,0 +1,3 @@
+[mysqld]
+# Set max_allowed_packet to 256M (or any other value)
+max_allowed_packet=256M

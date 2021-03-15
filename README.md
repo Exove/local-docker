@@ -419,7 +419,7 @@ commands `php` container tries to connect to your IDE:
 This Xdebug configuration is initially set in the base image this
 project is using (`xoxoxo/php-container`). However, this can be
 overridden for example in
-[95-drupal-development.ini file (PHP 7.4](./docker/build/php7.4/conf.d/95-drupal-development.ini)
+[95-drupal-development.ini file [PHP 7.4](./docker/build/php7.4/conf.d/95-drupal-development.ini)
 , and Xdebug's full config can be checked either from Drupal
 (`admin/reports/status/php`) or with command
 

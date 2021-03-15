@@ -8,7 +8,7 @@ version: '3.3'
 services:
   composer:
     # Runs `composer install` during startup.
-    build: ../docker/build/php/${PROJECT_PHP_VERSION:-7.3}
+    build: ../docker/build/php/${PROJECT_PHP_VERSION:-7.4}
     container_name: "${PROJECT_NAME}_composer"
     volumes:
       # Declaring only one volume with on volumes within allows building

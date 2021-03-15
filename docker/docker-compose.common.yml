@@ -108,7 +108,7 @@ services:
     # Available builds: https://hub.docker.com/r/xoxoxo/php-container/tags
     # Custom build contains sendmail_path -fix for Mailhog and OPTION to add
     # overrides (per project) to other PHP config.
-    build: ./docker/build/php/${PROJECT_PHP_VERSION:-7.3}
+    build: ./docker/build/php/${PROJECT_PHP_VERSION:-7.4}
     container_name: "${PROJECT_NAME}_php"
     volumes:
       # :nocopy must be used with docker-sync

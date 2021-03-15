@@ -143,12 +143,14 @@ function ld_command_init_exec() {
     while [ -z "$PROJECT_PHP_VERSION" ]; do
         echo "What is the PHP version to use?"
         echo "Options:"
-        echo " [1] - PHP 7.1"
+        echo " [4] - PHP 7.4 (default)"
+        echo " [3] - PHP 7.3"
         echo " [2] - PHP 7.2"
-        echo " [3] - PHP 7.3 (default)"
+        echo " [1] - PHP 7.1"
         read -p "Select version: " VERSION
         case "$VERSION" in
-            ''|'3'|3) PROJECT_PHP_VERSION='7.3';;
+            ''|'4'|4) PROJECT_PHP_VERSION='7.4';;
+            '3'|3) PROJECT_PHP_VERSION='7.3';;
             '2'|2) PROJECT_PHP_VERSION='7.2';;
             '1'|1) PROJECT_PHP_VERSION='7.1';;
             *) echo -e "${Red}ERROR: PHP version selection failed. Please use the available options.${Color_Off}"

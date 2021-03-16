@@ -19,9 +19,8 @@ function ld_command_solr-config-update_exec() {
       return 3
     fi
 
-    COMM="docker-compose exec ${CONTAINER_SOLR:-solr} bash -c \"cp /solr-config/conf/* /var/solr/data/${SOLR_CORE}/conf\""
-    [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}Next: $COMM${Color_Off}"
-    $COMM
+    [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}Next: docker-compose exec ${CONTAINER_SOLR:-solr} bash -c \"cp /solr-config/conf/* /var/solr/data/${SOLR_CORE}/conf\"${Color_Off}"
+    docker-compose exec ${CONTAINER_SOLR:-solr} bash -c "cp /solr-config/conf/* /var/solr/data/${SOLR_CORE}/conf"
 
     [ "$LD_VERBOSE" -ge "2" ] && echo -e "${Cyan}Next: Restarting Solr container, please wait...${Color_Off}"
     docker-compose restart ${CONTAINER_SOLR:-solr}

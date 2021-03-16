@@ -10,7 +10,7 @@ function ld_command_phpcbf_exec() {
       return 1
     fi
     if [ -z "$CONT_ID" ]; then
-      echo -e "${Red}ERROR: PHP container ('${CONTAINER_PHP:-php}')is not up.${Color_Off}"
+      echo -e "${Red}ERROR: PHP container ('${CONTAINER_PHP:-php}') is not up.${Color_Off}"
       return 2
     fi
     COMM="docker-compose exec -T ${CONTAINER_PHP:-php} /var/www/vendor/bin/phpcbf $@"

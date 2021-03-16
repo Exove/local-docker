@@ -27,5 +27,10 @@ function ld_command_solr-config-update_exec() {
 }
 
 function ld_command_solr-config-update_help() {
-    echo "Copies fresh configuration files into the solr container and restarts solr container"
+    echo -e "Copies fresh configuration files into the solr container and restarts solr container. Solr core name is '${BYellow}${SOLR_CORE:-**CORE NAME MISSING**}${Color_Off}'."
+}
+
+function ld_command_solr-config-update_extended_help() {
+    echo "Source of the configuration is in directory ./docker/configs/solr/conf/."
+    echo "Target directory inside the Solr container is /var/solr/data/${SOLR_CORE:-**CORE NAME MISSING**}/conf."
 }

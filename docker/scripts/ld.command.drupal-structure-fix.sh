@@ -10,7 +10,7 @@ function ld_command_drupal-structure-fix_exec() {
       return 1
     fi
     if [ -z "$CONT_ID" ]; then
-      echo -e "${Red}ERROR: PHP container ('${CONTAINER_PHP:-php}')is not up.${Color_Off}"
+      echo -e "${Red}ERROR: PHP container ('${CONTAINER_PHP:-php}') is not up.${Color_Off}"
       return 2
     fi
     [ "$LD_VERBOSE" -ge "1" ] && echo -e "${Yellow}Creating some folders and setting file perms to project below ${BYellow}${APP_ROOT}${Yellow}.${Color_Off}"

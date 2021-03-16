@@ -277,12 +277,12 @@ function ld_command_init_exec() {
     case "$VERSION" in
       '9.0')
         COMPOSER_INIT='composer -vv create-project drupal/recommended-project:~9.0.0 . --no-interaction'
-        POST_COMPOSER_INIT='composer -vv require drupal/console:^1.9.4 drush/drush:^10.0 cweagans/composer-patches:~1.0'
+        POST_COMPOSER_INIT='composer -vv require drush/drush:^10.0 cweagans/composer-patches:~1.0'
         echo -e "${Green}Creating project using ${BGreen}Drupal 9.0.x${Green}, recommended structure (${BGreen}drupal/recommended-project:~9.0.0${Green}), with the addition of Drupal Console, Drush and composer patches.${Color_Off}"
         ;;
       '9.0-dev')
         COMPOSER_INIT='composer -vv create-project drupal/recommended-project:~9.0.0 . --no-interaction --stability=dev'
-        POST_COMPOSER_INIT='composer -vv require drupal/console:^1.9.4 drush/drush:^10.0 cweagans/composer-patches:~1.0'
+        POST_COMPOSER_INIT='composer -vv require drush/drush:^10.0 cweagans/composer-patches:~1.0'
         echo -e "${Green}Creating project using ${BGreen}Drupal 9.0.x (dev)${Green}, recommended structure (${BGreen}drupal/recommended-project:~9.0.0${Green}), with the addition of Drupal Console, Drush and composer patches.${Color_Off}"
         ;;
       '8.9')
